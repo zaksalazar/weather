@@ -1,15 +1,25 @@
-var city = $(".city");
+var city = $("London");
 var weather = $(".weather");
 var temp = $(".temp");
 var description = $(".description");
 var humidity = $(".humidity");
 var wind = $(".wind");
 var searchButton = $("#searchButton");
-fetch(
-  `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${APIKey}`
-)
-  .then((res) => res.json())
-  .then(function (response) {});
+var input = $("#city"); 
+//API call//
+
+var api = 'https://api.openweathermap.org/data/2.5/weather?q='; 
+var url = api + input.Value() + apiKey + units;
+var apiKey = $(".apiKey");
+var units = '&units=imperial'; 
+
+$("#searchButton").on("click", weatherAsk())
+
+function weatherAsk(){
+    var url = api + city + apiKey + units; 
+    loadJSON(url, gotData);
+    console.log(city); 
+}; 
 
 //forecast //
 fetch(
