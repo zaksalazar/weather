@@ -1,9 +1,25 @@
-function GetInfo(){
-    const newName = document.getElementById('cityInput');
-    const cityName = document.getElementById('cityyName');
-    cityName.innerHTML = "--"=newName.value+"--";
-}
+var city = $(".city");
+var weather = $(".weather");
+var temp = $(".temp");
+var description = $(".description");
+var humidity = $(".humidity");
+var wind = $(".wind");
+var searchButton = $("#searchButton");
+fetch(
+  `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${APIKey}`
+)
+  .then((res) => res.json())
+  .then(function (response) {});
 
-fetch('https://api.openweathermap.org/data/2.5/?forcastq='+newName.value'&apiidf6f8a6a2cbbba34584a4bb54855b24f8')
-.then(response => response.json())
-.then(data =>{})
+//forecast //
+fetch(
+  `https://api.openweathermap.org/data/2.5/forecast?id=${cityid}&units=imperial&appid=${APIKey}`
+)
+  .then((res) => res.json())
+  .then(function (response) {});
+
+//take input from city and return weather data
+
+//display weather for city for the next 5 days
+
+//store in history table
