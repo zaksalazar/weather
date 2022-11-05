@@ -1,35 +1,43 @@
-var city = $("London");
+$(document).ready(function() {
+const city = document.getElementById("userinput").value;
 var weather = $(".weather");
 var temp = $(".temp");
 var description = $(".description");
 var humidity = $(".humidity");
 var wind = $(".wind");
-var searchButton = $("#searchButton");
-var input = $("#city"); 
-//API call//
+var searchButton = $("#submitButton");
 
+//API call//
 var api = 'https://api.openweathermap.org/data/2.5/weather?q='; 
-var url = api + input.Value() + apiKey + units;
-var apiKey = $(".apiKey");
+var url =  'https://api.openweathermap.org/data/2.5/weather?q=London&appid=e8db7a3118009c80fecb82b6fe17e653'
+var APIKey = '&appid=21654ecd640e44008364d3ec8f18f916';
 var units = '&units=imperial'; 
 
-$("#searchButton").on("click", weatherAsk())
 
-function weatherAsk(){
-    var url = api + city + apiKey + units; 
-    loadJSON(url, gotData);
-    console.log(city); 
-}; 
+document.getElementById('submitButton').addEventListener("click", console.log(city)); 
+}); 
+    // code for enter
 
-//forecast //
-fetch(
-  `https://api.openweathermap.org/data/2.5/forecast?id=${cityid}&units=imperial&appid=${APIKey}`
-)
-  .then((res) => res.json())
-  .then(function (response) {});
+ 
+
+function getCity() {
+  console.log(city); }
+
+function getWeather() {
+     fetch(url)
+    .then((res) => res.json())
+    .then(function(response){
+        console.log(response)
+  }
+    )}; 
+   
+
+//same day // 
+  
 
 //take input from city and return weather data
 
 //display weather for city for the next 5 days
 
 //store in history table
+
