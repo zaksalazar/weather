@@ -7,27 +7,27 @@ $(document).ready(function () {
   var humidity = $(".humidity");
   var wind = $(".wind");
   var searchButton = $("#submitButton");
+  var currentTemperature = $('#temperature');
 
   //API call//
   $("#submitButton").on("click", getCityName);
-  // code for enter
+  // code for event handler 
   function getCityName(event) {
     if (getCity.val().trim() !== "") {
-      city = getCity.val().trim();
-
+      const searhedCity = getCity.val().trim(); 
+      getWeather(searchedCity);
     }
   }
-
+//This function will pull the searched for city and populate the card with relevant data 
   function getWeather(city) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=21654ecd640e44008364d3ec8f18f916`)
       .then((res) => res.json())
-      .then(function (response) {
-        console.log(response);
-        const tempF = response.main.temp;
-        tempF.html(tempF).tofixed(2)="&#8457"
+      .then((weatherData) => {
+        console.log(weatherData); 
+        // const tempF = weatherData.main.temp
+        // currentTemperature.html(tempF).tofixed(2)="&#8457"
       });
   }
-
 
   //same day //
 
