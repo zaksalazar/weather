@@ -10,14 +10,15 @@ $(document).ready(function () {
   var currentTemperature = $('#temperature');
   var yourCity = $('#yourCity');
 
-  //API call//
-  $("#submitButton").on("click", getCityName, getWeather, getForecast);
+  //event handler//
+  $("#submitButton").on("click", getCityName);
   // code for event handler 
   function getCityName(event) {
     if (getCity.val().trim() !== "") {
       const city = getCity.val().trim(); 
       getWeather(city);
       getForecast (city);
+      addToHistory(city)
     }
   }
 //Current Day: This function will pull the searched for city and populate the card with relevant data 
@@ -32,6 +33,7 @@ $(document).ready(function () {
         const iconurl="http://openweathermap.org/img/wn/"+ weathericon +"@2x.png" 
         var icon = document.createElement('img');
         icon.src = iconurl 
+        localStorage.setItem('cityName',JSON.stringify(cityName)) 
         document.getElementById("yourCity").textContent = cityName
         document.getElementById("dayicon").innerHTML = ""
         document.getElementById('dayicon').appendChild(icon)
@@ -40,8 +42,8 @@ $(document).ready(function () {
         document.getElementById('RH').textContent = res.main.humidity
         document.getElementById('windSpeed').textContent = res.wind.speed  
         document.getElementById('yourCity').html =(cityName);
-        localStorage.setItem([0])
       });
+      
   }
 
   //5 day forecast //
@@ -72,16 +74,23 @@ $(document).ready(function () {
           `
           document.getElementById("weatherContainer").innerHTML += cityCard
         }
-
-      })
-      function loadHistory(){
-        
+      })  
       }
+      //Daynamically add the passed city on the search history
+function addToHistory(city){
+  const container = document.getElementById('historyContainer')
+  const historyButton = document.createElement('button')
+  historyButton.classList.add('historyBtn')
+  historyButton.innerHTML = city 
+  container.appendChild(historyButton);
 }
+// display the past search again when the list group item is clicked in search history
 
-
-
-  //display weather for city for the next 5 days
-
-  //store in history table
+//call getWeather & get forecast from button(city) but do not add to history. 
+$('.historyBtn').on('click', historyClick)
+function historyClick(city){
+  getWeather(city);
+  getForecast(city);
+}
+      
 })

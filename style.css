@@ -62,45 +62,48 @@ h1.temp{
     justify-content: center;
 }
 
-button {margin: .5em;
-    border-radius: 30%;
+button {
+    margin: .5em;
+    border-radius: 5px;
     border: none;
     height: 46px;
-    width: 46px;
+    width: fit-content;
     outline: none;
-    background: #f1f0efd0;;
-    color: white;
+    background: #83d8e5d0;
+    color: black;
     cursor: pointer;
     transition: .2s ease-in-out;
 }
 
 .historyButton {
-        margin: .5em;
-        border-radius: 5px;
-        border: none;
-        height: 46px;
-        width: 150px;
-        outline: none;
-        background: #3ad1e759;
-        color: black;
-        cursor: pointer;
-        transition: .2s ease-in-out;
+    margin: .5em;
+    border-radius: 5px;
+    border: none;
+    height: 46px;
+    width: 150px;
+    outline: none;
+    background: #3ad1e759;
+    color: black;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+    width:fit-content
 }
 
 button:hover {
-    background: #7c7c2b;
+    background: #e0941a;
 }
 
-input.search-bar {
-    border: none;
-    outline: none;
-    padding: .5em 1em;
-    border-radius: 15px;
-    background: #7c7c7c2b;
-    color: white;
-    font-family: inherit;
-    font-size: 105%;
-    width: calc(100% - 80px);
+    input.search-bar {
+        border: none;
+        outline: none;
+        padding: .5em 1em;
+        border-radius: 15px;
+        background: #121111e6;
+        color: white;
+        font-family: inherit;
+        font-size: 40px;
+        width: calc(100% - 80px);
+        height: 50px;
 }
 #cityIntput, #cityName, #inputContainer, button {
     margin: 3px;
