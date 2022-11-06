@@ -12,15 +12,44 @@ html {
   }
   
   .card {
-    background: #000000d0;
-    color: white;
+    background: #f1f0efd0;
+    color: black;
     padding: 2em;
     border-radius: 30px;
     margin: 1em;
     width: 100%;
-    max-width: 420px;
+    width: 600px;
+    height: 800px;
     align-items: center;
     justify-content: center;
+}
+
+#historyContainer {
+    background: #f1f0efd0;;
+    color: black;
+    padding: 2em;
+    border-radius: 30px;
+    margin: 1em;
+    width: 100%;
+    width: 600px;
+    height: 800px;
+    align-items: center;
+    justify-content: center;
+
+}
+h2.city {
+    font-size: xx-large;
+}
+.wind {
+    font-size: xx-large;
+}
+
+div#humidity {
+    font-size: xx-large;
+}
+
+div#description {
+    font-size: xxx-large;
 }
 
 h1.temp{
@@ -39,10 +68,23 @@ button {margin: .5em;
     height: 46px;
     width: 46px;
     outline: none;
-    background: #7c7c7c2b;
+    background: #f1f0efd0;;
     color: white;
     cursor: pointer;
     transition: .2s ease-in-out;
+}
+
+.historyButton {
+        margin: .5em;
+        border-radius: 5px;
+        border: none;
+        height: 46px;
+        width: 150px;
+        outline: none;
+        background: #3ad1e759;
+        color: black;
+        cursor: pointer;
+        transition: .2s ease-in-out;
 }
 
 button:hover {
@@ -73,12 +115,21 @@ input.search-bar {
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
-    height: 300px;
+    height: 400px;
     width: 1300px;
     border: 5px solid rgba(97, 95,95, 0.829);
     border-radius: 10px;
-    background: #000000d0;
-    color: white;
+    background: #f1f0efd0;;
+    color: black;
+}
+
+#forecast {
+    font-size: x-large;
+}
+p#day1 {
+    /* margin: 55px; */
+    font-weight: bold;
+    font-size: x-large;
 }
 
 #iconsContainer{
@@ -96,8 +147,8 @@ input.search-bar {
 .icons {
     display: inline-block; 
     float: left;
-    height: 200px;
-    width: 190px;
+    height: 300px;
+    width: 200px;
     margin: 20px;
     border: 5px solid rgb(48, 47, 47);
     border-radius: 10px;

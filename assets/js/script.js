@@ -40,6 +40,7 @@ $(document).ready(function () {
         document.getElementById('RH').textContent = res.main.humidity
         document.getElementById('windSpeed').textContent = res.wind.speed  
         document.getElementById('yourCity').html =(cityName);
+        localStorage.setItem([0])
       });
   }
 
@@ -59,20 +60,23 @@ $(document).ready(function () {
           const icon = res.list[i].weather[0].icon
           const iconurl="http://openweathermap.org/img/wn/"+ icon +"@2x.png"
           const cityCard =`
-        <div class="icons">
-        <p class="weather" id="day1">${date}</p>
-        <div class="image">
-          <img src=${iconurl} class="imgClass" id="img1" />
-        </div>
-        <p class="minValues" id="day1temp">Temp:${temp} </p>
-        <p class="maxValues" id="day1Max">Wind Speed:${wind} </p>
-        <p class="maxValues" id="day1Max">Humidity:${RH} </p>
-      </div>
-        `
-        document.getElementById("weatherContainer").innerHTML += cityCard
+            <div class="icons">
+              <p class="weather" id="day1">${date}</p>
+              <div class="image">
+                <img src=${iconurl} class="imgClass" id="img1" />
+              </div>
+              <p class="minValues" id="day1temp">Temp:${temp} </p>
+              <p class="maxValues" id="day1Max">Wind Speed:${wind} </p>
+              <p class="maxValues" id="day1Max">Humidity:${RH} </p>
+            </div>
+          `
+          document.getElementById("weatherContainer").innerHTML += cityCard
         }
 
       })
+      function loadHistory(){
+        
+      }
 }
 
 
