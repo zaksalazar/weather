@@ -30,7 +30,7 @@ $(document).ready(function () {
       .then((res) => res.json())
       .then((res) => {
         renderWeather(res);
-        //check localStorage for history first
+        //check localStorage for history then add to local storage //
         var history = localStorage.getItem("history");
         if (history === null) {
           history = [res];
@@ -50,33 +50,27 @@ $(document).ready(function () {
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-        const cityName = res.name;
-        document.getElementById("weatherContainer").innerHTML = "";
-        for (let i = 0; i < res.list.length; i += 8) {
-          const date = res.list[i].dt_txt.split(" ")[0];
-          const temp = res.list[i].main.temp;
-          const wind = res.list[i].wind.speed;
-          const RH = res.list[i].main.humidity;
-          const icon = res.list[i].weather[0].icon;
-          const iconurl =
-            "http://openweathermap.org/img/wn/" + icon + "@2x.png";
-          const cityCard = `
-            <div class="icons">
-              <p class="weather" id="day1">${date}</p>
-              <div class="image">
-                <img src=${iconurl} class="imgClass" id="img1" />
-              </div>
-              <p class="minValues" id="day1temp">Temp:${temp} </p>
-              <p class="maxValues" id="day1Max">Wind Speed:${wind} </p>
-              <p class="maxValues" id="day1Max">Humidity:${RH} </p>
-            </div>
-          `;
-          document.getElementById("weatherContainer").innerHTML += cityCard;
+        renderForecast(res);
+        // add forecast History to local storage //
+        var forecastHistory = localStorage.getItem("forecastHistory");
+        if (forecastHistory === null) {
+          forecastHistory = [res];
+          localStorage.setItem(
+            "forecastHistory",
+            JSON.stringify(forecastHistory)
+          );
+        } else {
+          forecastHistory = JSON.parse(forecastHistory);
+          forecastHistory.push(res);
+          localStorage.setItem(
+            "forecastHistory",
+            JSON.stringify(forecastHistory),
+            console.log("1", "forecastHistory")
+          );
         }
       });
   }
-  //Daynamically add the passed city on the search history
+  //Daynamically add the past city on the search history
   function addToHistory(city) {
     const container = document.getElementById("historyContainer");
     const historyButton = document.createElement("button");
@@ -84,6 +78,7 @@ $(document).ready(function () {
     historyButton.innerHTML = city;
     container.appendChild(historyButton);
   }
+
   function renderSavedHistoryBtns() {
     var savedHistory = localStorage.getItem("history");
     savedHistory = JSON.parse(savedHistory);
@@ -100,27 +95,59 @@ $(document).ready(function () {
     var savedHistory = localStorage.getItem("history");
     savedHistory = JSON.parse(savedHistory);
     for (let i = 0; i < savedHistory.length; i++) {
-      if (event.target.textContent === savedHistory[i].name) { 
-        renderWeather(savedHistory[i])
+      if (event.target.textContent === savedHistory[i].name) {
+        renderWeather(savedHistory[i]);
       }
     }
-    //getWeather(city);
-    // getForecast(city);
+    var forecastHistory = localStorage.getItem("forecastHistory");
+    forecastHistory = JSON.parse(forecastHistory);
+    for (let i = 0; i < forecastHistory.length; i++) {
+      if (event.target.textContent === forecastHistory[i].name) {
+        renderForecast(forecastHistory[i]);
+      }
+    }
   }
 
   function renderWeather(weatherData) {
     const cityName = weatherData.name;
     const weathericon = weatherData.weather[0].icon;
-    const iconurl = "http://openweathermap.org/img/wn/" + weathericon + "@2x.png";
+    const iconurl =
+      "http://openweathermap.org/img/wn/" + weathericon + "@2x.png";
     var icon = document.createElement("img");
     icon.src = iconurl;
     document.getElementById("yourCity").textContent = cityName;
     document.getElementById("dayicon").innerHTML = "";
     document.getElementById("dayicon").appendChild(icon);
     document.getElementById("temperature").textContent = weatherData.main.temp;
-    document.getElementById("description").textContent = weatherData.weather[0].description;
+    document.getElementById("description").textContent =
+      weatherData.weather[0].description;
     document.getElementById("RH").textContent = weatherData.main.humidity;
     document.getElementById("windSpeed").textContent = weatherData.wind.speed;
     document.getElementById("yourCity").html = cityName;
+  }
+
+  function renderForecast(forecast) {
+    const cityName = forecast.name;
+    document.getElementById("weatherContainer").innerHTML = "";
+    for (let i = 0; i < forecast.list.length; i += 8) {
+      const date = forecast.list[i].dt_txt.split(" ")[0];
+      const temp = forecast.list[i].main.temp;
+      const wind = forecast.list[i].wind.speed;
+      const RH = forecast.list[i].main.humidity;
+      const icon = forecast.list[i].weather[0].icon;
+      const iconurl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+      const cityCard = `
+            <div class="icons">
+              <p class="weather" id="day1">${date}</p>
+              <div class="image">
+                <img src=${iconurl} class="imgClass" id="img1" />
+              </div>
+              <p class="minValues" id="day1temp">Temp:${temp} </p>
+              <p class="maxValues" id="day1Max">Wind Speed:${wind} </p>
+              <p class="maxValues" id="day1Max">Humidity:${RH} </p>
+            </div>
+          `;
+      document.getElementById("weatherContainer").innerHTML += cityCard;
+    }
   }
 });
