@@ -102,7 +102,9 @@ $(document).ready(function () {
     var forecastHistory = localStorage.getItem("forecastHistory");
     forecastHistory = JSON.parse(forecastHistory);
     for (let i = 0; i < forecastHistory.length; i++) {
-      if (event.target.textContent === forecastHistory[i].name) {
+      console.log('here') 
+      console.log(event.target.textContent , forecastHistory[i] )
+      if (event.target.textContent === forecastHistory[i].city.name) {
         renderForecast(forecastHistory[i]);
       }
     }
@@ -127,8 +129,10 @@ $(document).ready(function () {
   }
 
   function renderForecast(forecast) {
+    console.log("here")
     const cityName = forecast.name;
     document.getElementById("weatherContainer").innerHTML = "";
+    if (! forecast.list) return 
     for (let i = 0; i < forecast.list.length; i += 8) {
       const date = forecast.list[i].dt_txt.split(" ")[0];
       const temp = forecast.list[i].main.temp;
